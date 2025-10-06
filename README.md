@@ -11,24 +11,27 @@ A modern, professional Shopify theme designed specifically for real estate busin
 - **Professional Styling** - Modern, trustworthy design
 - **Customizable** - Easy theme customization options
 
-## 📁 Theme Structure
+## 📁 Repository Structure
+
+This repository contains a complete Shopify theme with the following structure:
 
 ```
-shopify-theme/
-├── assets/          # CSS and JavaScript files
-├── config/          # Theme configuration
-├── layout/          # Main layout template
-├── sections/        # Reusable section components
-├── templates/       # Page templates
-└── locales/         # Translation files
+├── assets/           # CSS and JavaScript files
+├── config/           # Theme configuration
+├── layout/           # Main layout template
+├── sections/         # Reusable section components (9 sections)
+├── templates/        # Page templates (4 templates)
+├── snippets/         # Reusable code snippets
+└── locales/          # Translation files
 ```
 
-## 🛠️ Installation
+## 🛠️ Shopify GitHub Integration
 
-1. Upload `shopify-theme/` to your Shopify store
-2. Go to Online Store > Themes
-3. Click "Add theme" and select this theme
-4. Customize in the theme editor
+This theme is designed to be connected directly to Shopify via GitHub:
+
+1. **Connect Repository** - Add this GitHub repository to your Shopify store
+2. **Automatic Sync** - Changes pushed to GitHub will automatically update your live theme
+3. **Theme Editor** - Customize the theme directly in Shopify's theme editor
 
 ## 🎯 Perfect For
 
