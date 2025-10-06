@@ -385,6 +385,187 @@ Blocks: {len(config.blocks)} available
         generator = templates.get(config.type, self._generate_generic_template)
         return generator(config)
 
+    def _generate_gallery_template(self, config: SectionConfig) -> str:
+        """Generate gallery section template"""
+        return """<section class="gallery-section animate-on-scroll">
+  <div class="container">
+    {% if section.settings.heading %}
+    <div class="section-header">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="gallery-grid" style="grid-template-columns: repeat({{ section.settings.columns | default: 3 }}, 1fr);">
+      {% for block in section.blocks %}
+      <div class="gallery-item {% if section.settings.hover_effect != 'none' %}hover-effect-{{ section.settings.hover_effect }}{% endif %}">
+        {% if block.settings.image %}
+        <img src="{{ block.settings.image | image_url: width: 400, height: 300 }}" alt="{{ block.settings.alt_text | default: block.settings.caption }}" />
+        {% endif %}
+        {% if block.settings.caption and section.settings.show_captions %}
+        <div class="gallery-caption">{{ block.settings.caption }}</div>
+        {% endif %}
+        {% if block.settings.link %}
+        <a href="{{ block.settings.link }}" class="gallery-link"></a>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.lightbox %}
+    <div class="gallery-lightbox" id="gallery-lightbox">
+      <div class="lightbox-content">
+        <img src="" alt="" />
+        <button class="lightbox-close">&times;</button>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>"""
+
+    def _generate_cta_template(self, config: SectionConfig) -> str:
+        """Generate CTA section template"""
+        return """<section class="cta-section animate-on-scroll"
+         {% if section.settings.background_image %}
+         style="background-image: url('{{ section.settings.background_image | image_url: width: 1920, height: 600 }}');"
+         {% endif %}>
+  <div class="cta-overlay" {% if section.settings.overlay_color %}style="background-color: {{ section.settings.overlay_color }};"{% endif %}></div>
+  <div class="container">
+    <div class="cta-content" style="text-align: {{ section.settings.text_alignment | default: 'center' }};">
+      <h2 class="cta-title">{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading %}
+      <p class="cta-subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+      {% if section.settings.button_text %}
+      <div class="cta-actions">
+        <a href="{{ section.settings.button_url }}" class="btn btn-{{ section.settings.button_style | default: 'primary' }}">{{ section.settings.button_text }}</a>
+        {% if section.settings.secondary_button_text %}
+        <a href="{{ section.settings.secondary_button_url }}" class="btn btn-outline">{{ section.settings.secondary_button_text }}</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>"""
+
+    def _generate_contact_template(self, config: SectionConfig) -> str:
+        """Generate contact section template"""
+        return """<section class="contact-section animate-on-scroll">
+  <div class="container">
+    {% if section.settings.heading %}
+    <div class="section-header">
+      <h2>{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading %}
+      <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="contact-content">
+      <form class="contact-form" id="contact-form-{{ section.id }}">
+        {% if section.settings.show_name %}
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+
+        {% if section.settings.show_phone %}
+        <div class="form-group">
+          <input type="tel" name="phone" placeholder="Your Phone">
+        </div>
+        {% endif %}
+
+        {% if section.settings.show_company %}
+        <div class="form-group">
+          <input type="text" name="company" placeholder="Your Company">
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+          <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        </div>
+
+        {% if section.settings.require_consent %}
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="consent" required>
+            I agree to the privacy policy *
+          </label>
+        </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary">{{ section.settings.button_text | default: 'Send Message' }}</button>
+
+        <div class="form-message" style="display: none;"></div>
+      </form>
+    </div>
+  </div>
+</section>"""
+
+    def _generate_newsletter_template(self, config: SectionConfig) -> str:
+        """Generate newsletter section template"""
+        return """<section class="newsletter-section animate-on-scroll">
+  <div class="container">
+    <div class="newsletter-content" style="text-align: {{ section.settings.text_alignment | default: 'center' }};">
+      {% if section.settings.heading %}
+      <h2 class="newsletter-title">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading %}
+      <p class="newsletter-subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      <form class="newsletter-form" id="newsletter-form-{{ section.id }}">
+        <div class="form-group">
+          <input type="email" name="email" placeholder="{{ section.settings.placeholder_text | default: 'Enter your email' }}" required>
+          <button type="submit" class="btn btn-primary">{{ section.settings.button_text | default: 'Subscribe' }}</button>
+        </div>
+
+        {% if section.settings.require_consent %}
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" name="consent" required>
+            I agree to receive marketing emails *
+          </label>
+        </div>
+        {% endif %}
+
+        <div class="form-message" style="display: none;"></div>
+      </form>
+    </div>
+  </div>
+</section>"""
+
+    def _generate_stats_template(self, config: SectionConfig) -> str:
+        """Generate stats section template"""
+        return """<section class="stats-section animate-on-scroll">
+  <div class="container">
+    {% if section.settings.heading %}
+    <div class="section-header">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="stats-grid">
+      {% for block in section.blocks %}
+      <div class="stat-item">
+        {% if block.settings.icon %}
+        <div class="stat-icon">
+          <img src="{{ block.settings.icon | image_url: width: 64, height: 64 }}" alt="Stat icon" />
+        </div>
+        {% endif %}
+        <div class="stat-number" data-target="{{ block.settings.number }}">{{ block.settings.number }}</div>
+        {% if block.settings.label %}
+        <div class="stat-label">{{ block.settings.label }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>"""
+
     def _generate_hero_template(self, config: SectionConfig) -> str:
         """Generate hero section template"""
         return """<section class="hero-section animate-on-scroll"
