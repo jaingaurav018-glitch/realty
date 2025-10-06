@@ -1,0 +1,125 @@
+<section class="section animate-on-scroll" style="background-color: #f9fafb;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Property Types We Offer</h2>
+      <p class="section-subtitle">From residential homes to commercial spaces, we have properties for every need</p>
+    </div>
+    
+    <div class="property-types-grid grid">
+      <div class="property-type-card">
+        <div class="property-type-icon">
+          <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+        </div>
+        <h3>Residential Properties</h3>
+        <p>Beautiful homes, apartments, and villas for families and individuals</p>
+        <a href="/collections/residential" class="btn btn-outline">View Residential</a>
+      </div>
+      
+      <div class="property-type-card">
+        <div class="property-type-icon">
+          <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+          </svg>
+        </div>
+        <h3>Commercial Properties</h3>
+        <p>Office spaces, retail locations, and commercial buildings for businesses</p>
+        <a href="/collections/commercial" class="btn btn-outline">View Commercial</a>
+      </div>
+      
+      <div class="property-type-card">
+        <div class="property-type-icon">
+          <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3>Office Spaces</h3>
+        <p>Modern office spaces designed for productivity and collaboration</p>
+        <a href="/collections/offices" class="btn btn-outline">View Offices</a>
+      </div>
+      
+      <div class="property-type-card">
+        <div class="property-type-icon">
+          <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+        </div>
+        <h3>Showrooms</h3>
+        <p>Premium retail showrooms and display spaces for your business</p>
+        <a href="/collections/showrooms" class="btn btn-outline">View Showrooms</a>
+      </div>
+      
+      <div class="property-type-card">
+        <div class="property-type-icon">
+          <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </div>
+        <h3>Properties for Rent</h3>
+        <p>Flexible rental options for residential and commercial properties</p>
+        <a href="/collections/for-rent" class="btn btn-outline">View Rentals</a>
+      </div>
+      
+      <div class="property-type-card">
+        <div class="property-type-icon">
+          <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+          </svg>
+        </div>
+        <h3>Investment Properties</h3>
+        <p>High-return investment opportunities in real estate</p>
+        <a href="/collections/investment" class="btn btn-outline">View Investments</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.property-types-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.property-type-card {
+  background: white;
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.property-type-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.property-type-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  border-radius: 50%;
+  margin: 0 auto var(--spacing-lg);
+}
+
+.property-type-card h3 {
+  margin-bottom: var(--spacing-md);
+  color: #111827;
+}
+
+.property-type-card p {
+  color: #6b7280;
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .property-types-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
