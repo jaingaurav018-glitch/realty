@@ -1,0 +1,235 @@
+{{ content_for_layout }}
+
+<!-- Product Hero Section -->
+<section class="product-hero" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+  <div class="container">
+    <div style="max-width: 1200px; margin: 0 auto; padding: var(--spacing-3xl) 0;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-3xl); align-items: start;">
+        <!-- Product Images -->
+        <div class="product-gallery">
+          <div class="main-image">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 600, height: 400 }}" alt="{{ product.title }}" />
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="{{ product.title }}" />
+            {% endif %}
+          </div>
+          {% if product.images.size > 1 %}
+            <div class="thumbnail-images" style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md); overflow-x: auto;">
+              {% for image in product.images %}
+                <img src="{{ image | image_url: width: 100, height: 80 }}" alt="{{ product.title }}" style="border-radius: var(--border-radius-sm); cursor: pointer; flex-shrink: 0;" />
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        
+        <!-- Product Info -->
+        <div class="product-info">
+          <div class="product-badges" style="margin-bottom: var(--spacing-lg);">
+            <span class="badge" style="background-color: var(--color-primary); color: white; padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius-sm); font-size: 0.75rem; text-transform: uppercase;">{{ product.metafields.custom.property_type | default: 'Property' }}</span>
+            {% if product.available %}
+              <span class="badge" style="background-color: var(--color-accent); color: white; padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius-sm); font-size: 0.75rem; text-transform: uppercase;">Available</span>
+            {% else %}
+              <span class="badge" style="background-color: #ef4444; color: white; padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius-sm); font-size: 0.75rem; text-transform: uppercase;">Sold</span>
+            {% endif %}
+          </div>
+          
+          <h1 style="margin-bottom: var(--spacing-lg);">{{ product.title }}</h1>
+          
+          <div class="product-meta" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); padding: var(--spacing-lg); background: white; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm);">
+            <div>
+              <h3 style="color: #6b7280; font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Price</h3>
+              <div style="font-size: 1.5rem; font-weight: var(--font-weight-bold); color: var(--color-primary);">
+                {% if product.price_varies %}
+                  From {{ product.price_min | money }}
+                {% else %}
+                  {{ product.price | money }}
+                {% endif %}
+              </div>
+            </div>
+            
+            <div>
+              <h3 style="color: #6b7280; font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Location</h3>
+              <div>{{ product.metafields.custom.location | default: 'Not specified' }}</div>
+            </div>
+            
+            <div>
+              <h3 style="color: #6b7280; font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Property Type</h3>
+              <div>{{ product.metafields.custom.property_type | default: 'Not specified' }}</div>
+            </div>
+            
+            <div>
+              <h3 style="color: #6b7280; font-size: 0.875rem; margin-bottom: var(--spacing-xs);">Bedrooms</h3>
+              <div>{{ product.metafields.custom.bedrooms | default: 'N/A' }}</div>
+            </div>
+          </div>
+          
+          <!-- Quick Actions -->
+          <div class="product-actions" style="display: flex; gap: var(--spacing-md); margin-bottom: var(--spacing-xl);">
+            <button class="btn btn-primary" onclick="sendWhatsAppMessage('{{ product.title }}', '{{ product.url }}')" style="flex: 1;">Inquire via WhatsApp</button>
+            <a href="/pages/contact" class="btn btn-outline" style="flex: 1;">Schedule Visit</a>
+          </div>
+          
+          <!-- Lead Capture Form -->
+          <div class="lead-form-container" style="background: white; padding: var(--spacing-xl); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm);">
+            <h3 style="margin-bottom: var(--spacing-lg);">Get More Information</h3>
+            <form class="lead-form" id="product-lead-form">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                <div class="form-group">
+                  <input type="text" class="form-input" placeholder="Your Name *" required>
+                </div>
+                <div class="form-group">
+                  <input type="tel" class="form-input" placeholder="WhatsApp Number *" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-input" placeholder="Email Address (Optional)">
+              </div>
+              <div class="form-group">
+                <textarea class="form-textarea" rows="4" placeholder="Message (Optional)"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Send Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Details -->
+<section class="section">
+  <div class="container">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: var(--spacing-3xl);">
+      <!-- Product Description -->
+      <div class="product-description">
+        <h2>Property Details</h2>
+        <div style="margin-top: var(--spacing-lg);">
+          {{ product.description }}
+        </div>
+        
+        <!-- Property Features -->
+        {% if product.metafields.custom.features %}
+          <div style="margin-top: var(--spacing-xl);">
+            <h3>Features & Amenities</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-lg);">
+              {{ product.metafields.custom.features }}
+            </div>
+          </div>
+        {% endif %}
+        
+        <!-- Virtual Tour -->
+        {% if settings.show_virtual_tour and product.metafields.custom.virtual_tour_url %}
+          <div style="margin-top: var(--spacing-xl);">
+            <h3>Virtual Tour</h3>
+            <div style="margin-top: var(--spacing-lg);">
+              <iframe src="{{ product.metafields.custom.virtual_tour_url }}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="product-sidebar">
+        <!-- Agent Info -->
+        <div style="background: white; padding: var(--spacing-lg); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); margin-bottom: var(--spacing-lg);">
+          <h3>Contact Agent</h3>
+          <div style="margin-top: var(--spacing-lg);">
+            <p><strong>Shivalik Group</strong></p>
+            {% if settings.contact_phone %}
+              <p>📞 <a href="tel:{{ settings.contact_phone }}">{{ settings.contact_phone }}</a></p>
+            {% endif %}
+            {% if settings.contact_email %}
+              <p>✉️ <a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></p>
+            {% endif %}
+          </div>
+        </div>
+        
+        <!-- Similar Properties -->
+        <div style="background: white; padding: var(--spacing-lg); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm);">
+          <h3>Similar Properties</h3>
+          <div style="margin-top: var(--spacing-lg);">
+            <!-- Similar properties would be populated here -->
+            <p style="color: #6b7280;">More properties coming soon...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Product gallery
+  const mainImage = document.querySelector('.main-image img');
+  const thumbnails = document.querySelectorAll('.thumbnail-images img');
+  
+  thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', function() {
+      mainImage.src = this.src;
+      thumbnails.forEach(thumb => thumb.style.opacity = '0.6');
+      this.style.opacity = '1';
+    });
+  });
+  
+  // Lead form
+  const leadForm = document.getElementById('product-lead-form');
+  if (leadForm) {
+    leadForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      
+      // Here you would typically send the data to your backend
+      alert('Thank you for your inquiry! We will contact you soon.');
+      this.reset();
+    });
+  }
+});
+</script>
+
+<style>
+/* Product Gallery */
+.product-gallery {
+  position: sticky;
+  top: 100px;
+}
+
+.thumbnail-images {
+  padding-bottom: var(--spacing-sm);
+}
+
+.thumbnail-images img {
+  transition: opacity 0.2s ease;
+}
+
+.thumbnail-images img:first-child {
+  opacity: 1;
+}
+
+/* Product Actions */
+.product-actions {
+  flex-wrap: wrap;
+}
+
+/* Lead Form */
+.lead-form-container {
+  position: sticky;
+  top: 100px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-hero .container > div {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-sidebar {
+    order: -1;
+  }
+  
+  .lead-form-container,
+  .product-gallery {
+    position: static;
+  }
+}
+</style>

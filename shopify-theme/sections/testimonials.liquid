@@ -1,0 +1,182 @@
+<section class="section animate-on-scroll" style="background-color: #f9fafb;">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Our Clients Say</h2>
+      <p class="section-subtitle">Don't just take our word for it - hear from our satisfied clients</p>
+    </div>
+    
+    <div class="testimonials-grid grid">
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Shivalik Group helped us find our dream home in record time. Their expertise and professionalism made the entire process smooth and stress-free. Highly recommended!"</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Rajesh Kumar" />
+          </div>
+          <div class="author-info">
+            <h4>Rajesh Kumar</h4>
+            <p>Home Buyer</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"As a business owner, I needed a commercial space that would reflect my brand. Shivalik Group not only found the perfect location but also negotiated excellent terms."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Priya Sharma" />
+          </div>
+          <div class="author-info">
+            <h4>Priya Sharma</h4>
+            <p>Business Owner</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"The investment property recommended by Shivalik Group has given me excellent returns. Their market knowledge and timing were spot on. Thank you!"</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Amit Patel" />
+          </div>
+          <div class="author-info">
+            <h4>Amit Patel</h4>
+            <p>Property Investor</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Finding a rental property in the city was challenging until I contacted Shivalik Group. They understood my requirements perfectly and found exactly what I needed."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Sneha Reddy" />
+          </div>
+          <div class="author-info">
+            <h4>Sneha Reddy</h4>
+            <p>Rental Client</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"The office space leased through Shivalik Group has significantly improved our team's productivity. The location and amenities are perfect for our growing business."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Vikram Singh" />
+          </div>
+          <div class="author-info">
+            <h4>Vikram Singh</h4>
+            <p>Tech Entrepreneur</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <p>"Shivalik Group's attention to detail and commitment to customer satisfaction is unmatched. They made selling our property a hassle-free experience."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Meera Joshi" />
+          </div>
+          <div class="author-info">
+            <h4>Meera Joshi</h4>
+            <p>Property Seller</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.testimonials-grid {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.testimonial-card {
+  background: white;
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-content {
+  margin-bottom: var(--spacing-lg);
+}
+
+.testimonial-content p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #374151;
+  font-style: italic;
+  position: relative;
+}
+
+.testimonial-content p::before {
+  content: '"';
+  font-size: 4rem;
+  color: var(--color-primary);
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  opacity: 0.3;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.author-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-info h4 {
+  margin-bottom: var(--spacing-xs);
+  color: #111827;
+}
+
+.author-info p {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonial-content p {
+    font-size: 1rem;
+  }
+}
+</style>

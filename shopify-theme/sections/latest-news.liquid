@@ -1,0 +1,151 @@
+<section class="section animate-on-scroll">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest News & Updates</h2>
+      <p class="section-subtitle">Stay informed with the latest real estate trends and market insights</p>
+    </div>
+    
+    <div class="news-grid grid">
+      <article class="news-card">
+        <div class="news-image">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Real Estate Market Trends" />
+        </div>
+        <div class="news-content">
+          <div class="news-meta">
+            <span class="news-date">December 15, 2024</span>
+            <span class="news-category">Market Trends</span>
+          </div>
+          <h3><a href="/blogs/news/real-estate-market-trends-2024">Real Estate Market Trends for 2024</a></h3>
+          <p>Discover the latest trends shaping the real estate market this year, from emerging neighborhoods to investment opportunities.</p>
+          <a href="/blogs/news/real-estate-market-trends-2024" class="btn btn-outline">Read More</a>
+        </div>
+      </article>
+      
+      <article class="news-card">
+        <div class="news-image">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Investment Guide" />
+        </div>
+        <div class="news-content">
+          <div class="news-meta">
+            <span class="news-date">December 10, 2024</span>
+            <span class="news-category">Investment</span>
+          </div>
+          <h3><a href="/blogs/news/beginners-guide-property-investment">Beginner's Guide to Property Investment</a></h3>
+          <p>Everything you need to know about starting your property investment journey, from choosing the right location to financing options.</p>
+          <a href="/blogs/news/beginners-guide-property-investment" class="btn btn-outline">Read More</a>
+        </div>
+      </article>
+      
+      <article class="news-card">
+        <div class="news-image">
+          <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Home Buying Tips" />
+        </div>
+        <div class="news-content">
+          <div class="news-meta">
+            <span class="news-date">December 5, 2024</span>
+            <span class="news-category">Buying Tips</span>
+          </div>
+          <h3><a href="/blogs/news/first-time-home-buyer-tips">First-Time Home Buyer Tips</a></h3>
+          <p>Essential tips and advice for first-time home buyers to make informed decisions and avoid common pitfalls.</p>
+          <a href="/blogs/news/first-time-home-buyer-tips" class="btn btn-outline">Read More</a>
+        </div>
+      </article>
+    </div>
+    
+    <div style="text-align: center; margin-top: var(--spacing-3xl);">
+      <a href="/blogs/news" class="btn btn-outline">View All News</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.news-grid {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.news-card {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.news-image {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.news-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-image img {
+  transform: scale(1.05);
+}
+
+.news-content {
+  padding: var(--spacing-lg);
+}
+
+.news-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.news-date,
+.news-category {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.news-category {
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.news-card h3 {
+  margin-bottom: var(--spacing-md);
+  font-size: 1.25rem;
+}
+
+.news-card h3 a {
+  color: #111827;
+  transition: color 0.2s ease;
+}
+
+.news-card h3 a:hover {
+  color: var(--color-primary);
+}
+
+.news-card p {
+  color: #6b7280;
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .news-meta {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+}
+</style>

@@ -1,0 +1,226 @@
+{{ content_for_layout }}
+
+<!-- Collection Header -->
+<section class="section" style="background-color: #f9fafb;">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: var(--spacing-3xl);">
+      <h1>{{ collection.title }}</h1>
+      {% if collection.description %}
+        <p style="font-size: 1.125rem; color: #6b7280; max-width: 600px; margin: 0 auto;">{{ collection.description }}</p>
+      {% endif %}
+      <p style="color: #6b7280; margin-top: var(--spacing-md);">{{ collection.products_count }} properties available</p>
+    </div>
+    
+    <!-- Property Filters -->
+    <div class="property-filters" style="background: white; padding: var(--spacing-lg); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); margin-bottom: var(--spacing-xl);">
+      <form class="filter-form">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg); align-items: end;">
+          <div class="form-group">
+            <label for="property-type" class="form-label">Property Type</label>
+            <select id="property-type" class="form-select">
+              <option value="">All Types</option>
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="office">Office</option>
+              <option value="showroom">Showroom</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="price-range" class="form-label">Price Range</label>
+            <select id="price-range" class="form-select">
+              <option value="">Any Price</option>
+              <option value="0-5000000">Under ₹50L</option>
+              <option value="5000000-10000000">₹50L - ₹1Cr</option>
+              <option value="10000000-20000000">₹1Cr - ₹2Cr</option>
+              <option value="20000000+">Above ₹2Cr</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" id="location" class="form-input" placeholder="Enter city or area">
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Filter Properties</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Properties Grid -->
+<section class="section">
+  <div class="container">
+    {% if collection.products.size > 0 %}
+      <div class="properties-grid grid">
+        {% for product in collection.products %}
+          <div class="property-card" data-type="{{ product.metafields.custom.property_type }}" data-price="{{ product.price | money_without_currency | remove: ',' }}" data-location="{{ product.metafields.custom.location }}">
+            <div class="property-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 400, height: 250 }}" alt="{{ product.title }}" />
+              {% else %}
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="{{ product.title }}" />
+              {% endif %}
+              <div class="property-badge">
+                {% if product.available %}
+                  Available
+                {% else %}
+                  Sold
+                {% endif %}
+              </div>
+            </div>
+            <div class="property-content">
+              <h3 class="property-title">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+              <div class="property-meta">
+                <span>{{ product.metafields.custom.property_type | default: 'Property' }}</span>
+                <span>{{ product.metafields.custom.location | default: 'Location' }}</span>
+                <span>{{ product.metafields.custom.bedrooms | default: 'N/A' }} BHK</span>
+              </div>
+              <div class="property-price">
+                {% if product.price_varies %}
+                  From {{ product.price_min | money }}
+                {% else %}
+                  {{ product.price | money }}
+                {% endif %}
+              </div>
+              <div class="property-actions">
+                <a href="{{ product.url }}" class="btn btn-outline">View Details</a>
+                <button class="btn btn-primary" onclick="sendWhatsAppMessage('{{ product.title }}', '{{ product.url }}')">Inquire</button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <!-- Pagination -->
+      {% if paginate.pages > 1 %}
+        <div style="text-align: center; margin-top: var(--spacing-3xl);">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+    {% else %}
+      <div style="text-align: center; padding: var(--spacing-3xl); color: #6b7280;">
+        <h3>No properties found</h3>
+        <p>Try adjusting your filters or browse our other collections.</p>
+        <a href="/collections/properties" class="btn btn-primary" style="margin-top: var(--spacing-lg);">View All Properties</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; text-align: center;">
+  <div class="container">
+    <h2 style="color: white;">Can't find what you're looking for?</h2>
+    <p style="font-size: 1.125rem; margin-bottom: var(--spacing-xl); opacity: 0.9;">Contact our experts for personalized property recommendations</p>
+    <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+      <a href="/pages/contact" class="btn btn-secondary" style="background-color: white; color: var(--color-primary);">Contact Us</a>
+      <a href="tel:{{ settings.contact_phone }}" class="btn btn-outline" style="border-color: white; color: white;">Call Now</a>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Property Filters */
+.property-filters {
+  margin-bottom: var(--spacing-xl);
+}
+
+.filter-form .form-group {
+  margin-bottom: 0;
+}
+
+/* Properties Grid */
+.properties-grid {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .filter-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-form .form-group {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .properties-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const filterForm = document.querySelector('.filter-form');
+  const propertyCards = document.querySelectorAll('.property-card');
+  
+  if (filterForm) {
+    filterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      filterProperties();
+    });
+    
+    // Real-time filtering
+    filterForm.addEventListener('change', filterProperties);
+    filterForm.addEventListener('input', debounce(filterProperties, 300));
+  }
+  
+  function filterProperties() {
+    const typeFilter = document.getElementById('property-type').value.toLowerCase();
+    const priceFilter = document.getElementById('price-range').value;
+    const locationFilter = document.getElementById('location').value.toLowerCase();
+    
+    propertyCards.forEach(card => {
+      const type = card.dataset.type ? card.dataset.type.toLowerCase() : '';
+      const price = parseFloat(card.dataset.price) || 0;
+      const location = card.dataset.location ? card.dataset.location.toLowerCase() : '';
+      
+      let showCard = true;
+      
+      // Type filter
+      if (typeFilter && !type.includes(typeFilter)) {
+        showCard = false;
+      }
+      
+      // Price filter
+      if (priceFilter) {
+        const [min, max] = priceFilter.split('-').map(v => parseFloat(v) || 0);
+        if (max) {
+          if (price < min || price > max) {
+            showCard = false;
+          }
+        } else if (price < min) {
+          showCard = false;
+        }
+      }
+      
+      // Location filter
+      if (locationFilter && !location.includes(locationFilter)) {
+        showCard = false;
+      }
+      
+      card.style.display = showCard ? 'block' : 'none';
+    });
+  }
+  
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+});
+</script>
