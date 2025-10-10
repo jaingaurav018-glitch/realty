@@ -1,0 +1,300 @@
+<section class="banner-slider">
+  <div class="slider-container">
+    <div class="slider-wrapper">
+      <div class="slide active">
+        <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80')"></div>
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content">
+            <h1>Find Your Dream Property in Ahmedabad</h1>
+            <p>Discover the perfect residential, commercial, or investment property with Purn Realty. We help you find homes and spaces that match your lifestyle and budget.</p>
+            <div class="hero-actions">
+              <a href="/collections/properties" class="btn btn-primary">Browse Properties</a>
+              <a href="/pages/contact" class="btn btn-outline">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="slide">
+        <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2053&q=80')"></div>
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content">
+            <h1>Luxury Villas & Apartments</h1>
+            <p>Explore our premium collection of luxury properties in prime locations across Ahmedabad. From modern apartments to spacious villas, find your perfect home.</p>
+            <div class="hero-actions">
+              <a href="/collections/luxury" class="btn btn-primary">View Luxury Properties</a>
+              <a href="/pages/contact" class="btn btn-outline">Schedule Visit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="slide">
+        <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+        <div class="slide-overlay"></div>
+        <div class="container">
+          <div class="slide-content">
+            <h1>Investment Opportunities</h1>
+            <p>Make smart investment decisions with our carefully selected properties. High returns, prime locations, and guaranteed appreciation in Ahmedabad's growing real estate market.</p>
+            <div class="hero-actions">
+              <a href="/collections/investment" class="btn btn-primary">Investment Properties</a>
+              <a href="/pages/contact" class="btn btn-outline">Get Investment Guide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slider Controls -->
+    <div class="slider-controls">
+      <button class="slider-btn prev" aria-label="Previous slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      <button class="slider-btn next" aria-label="Next slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Slider Indicators -->
+    <div class="slider-indicators">
+      <button class="indicator active" data-slide="0"></button>
+      <button class="indicator" data-slide="1"></button>
+      <button class="indicator" data-slide="2"></button>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Banner Slider Styles */
+.banner-slider {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+  z-index: 1;
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.slide-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  animation: fadeInUp 0.8s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slide-content p {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xl);
+  opacity: 0.95;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Slider Controls */
+.slider-controls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--spacing-lg);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.slider-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  pointer-events: all;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.slider-btn:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.slider-btn svg {
+  color: #374151;
+  width: 20px;
+  height: 20px;
+}
+
+/* Slider Indicators */
+.slider-indicators {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--spacing-sm);
+  z-index: 3;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: white;
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .banner-slider {
+    height: 80vh;
+    min-height: 500px;
+  }
+  
+  .slide-content h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  
+  .slide-content p {
+    font-size: 1.125rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .slider-controls {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .slider-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .slider-indicators {
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-slider {
+    height: 70vh;
+    min-height: 400px;
+  }
+  
+  .slide-content {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .hero-actions .btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.875rem;
+  }
+}
+</style>
