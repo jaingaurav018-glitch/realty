@@ -20,6 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <!-- Favicon -->
   {% if settings.favicon != blank %}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -69,6 +72,13 @@
   <!-- Skip to content link -->
   <a href="#main" class="skip-link">{{ 'general.accessibility.skip_to_content' | t }}</a>
   
+  <!-- Top Marquee -->
+  <div class="top-marquee">
+    <div class="marquee-content">
+      <span>🏠 New Properties Available in Ahmedabad! | 🏢 Commercial Spaces in Prime Locations | 💰 Best Investment Opportunities | 📞 Call Now: +91 98765 43210 | 🎉 Special Offers This Month!</span>
+    </div>
+  </div>
+  
   <!-- Header -->
   {% section 'header' %}
   
@@ -84,6 +94,21 @@
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'custom.js' | asset_url | script_tag }}
   
+  <!-- Cookie Notification -->
+  <div id="cookie-notification" class="cookie-notification">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <h4>🍪 We use cookies</h4>
+        <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookie-accept-all" class="btn btn-primary">Accept All</button>
+        <button id="cookie-settings" class="btn btn-outline">Settings</button>
+        <button id="cookie-decline" class="btn btn-text">Decline</button>
+      </div>
+    </div>
+  </div>
+
   <!-- WhatsApp Integration -->
   {% if settings.contact_phone %}
     <div class="whatsapp-float">

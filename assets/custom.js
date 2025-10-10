@@ -2,6 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all features
+    initBannerSlider();
+    initCookieNotification();
     initScrollToTop();
     initSmoothScrolling();
     initLazyLoading();
@@ -11,6 +13,333 @@ document.addEventListener('DOMContentLoaded', function() {
     initPropertySearch();
     initFormAnalytics();
 });
+
+// Banner Slider Functionality
+function initBannerSlider() {
+    const slider = document.querySelector('.banner-slider');
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.slide');
+    const indicators = slider.querySelectorAll('.indicator');
+    const prevBtn = slider.querySelector('.slider-btn.prev');
+    const nextBtn = slider.querySelector('.slider-btn.next');
+    
+    let currentSlide = 0;
+    let slideInterval;
+    
+    // Auto-play functionality
+    function startAutoPlay() {
+        slideInterval = setInterval(() => {
+            nextSlide();
+        }, 5000); // Change slide every 5 seconds
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(slideInterval);
+    }
+    
+    function showSlide(index) {
+        // Remove active class from all slides and indicators
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Add active class to current slide and indicator
+        if (slides[index]) {
+            slides[index].classList.add('active');
+        }
+        if (indicators[index]) {
+            indicators[index].classList.add('active');
+        }
+        
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+    }
+    
+    function prevSlide() {
+        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+    }
+    
+    // Event listeners
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            stopAutoPlay();
+            startAutoPlay();
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            stopAutoPlay();
+            startAutoPlay();
+        });
+    }
+    
+    // Indicator click handlers
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            showSlide(index);
+            stopAutoPlay();
+            startAutoPlay();
+        });
+    });
+    
+    // Pause on hover
+    slider.addEventListener('mouseenter', stopAutoPlay);
+    slider.addEventListener('mouseleave', startAutoPlay);
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+    
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        stopAutoPlay();
+    });
+    
+    slider.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+        startAutoPlay();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide(); // Swipe left - next slide
+            } else {
+                prevSlide(); // Swipe right - previous slide
+            }
+        }
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            stopAutoPlay();
+            startAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            stopAutoPlay();
+            startAutoPlay();
+        }
+    });
+    
+    // Start auto-play
+    startAutoPlay();
+}
+
+// Cookie Notification Functionality
+function initCookieNotification() {
+    const cookieNotification = document.getElementById('cookie-notification');
+    if (!cookieNotification) return;
+    
+    const acceptAllBtn = document.getElementById('cookie-accept-all');
+    const settingsBtn = document.getElementById('cookie-settings');
+    const declineBtn = document.getElementById('cookie-decline');
+    
+    // Check if user has already made a choice
+    const cookieChoice = localStorage.getItem('cookieChoice');
+    if (cookieChoice) {
+        cookieNotification.style.display = 'none';
+        return;
+    }
+    
+    // Show notification after a short delay
+    setTimeout(() => {
+        cookieNotification.classList.add('show');
+    }, 1000);
+    
+    // Accept All functionality
+    if (acceptAllBtn) {
+        acceptAllBtn.addEventListener('click', function() {
+            acceptAllCookies();
+            hideNotification();
+        });
+    }
+    
+    // Settings functionality
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', function() {
+            showCookieSettings();
+        });
+    }
+    
+    // Decline functionality
+    if (declineBtn) {
+        declineBtn.addEventListener('click', function() {
+            declineCookies();
+            hideNotification();
+        });
+    }
+    
+    function acceptAllCookies() {
+        // Set all cookie preferences
+        localStorage.setItem('cookieChoice', 'accepted');
+        localStorage.setItem('analyticsCookies', 'true');
+        localStorage.setItem('marketingCookies', 'true');
+        localStorage.setItem('functionalCookies', 'true');
+        
+        // Initialize analytics and other tracking
+        initializeTracking();
+        
+        console.log('All cookies accepted');
+    }
+    
+    function declineCookies() {
+        // Set minimal cookie preferences
+        localStorage.setItem('cookieChoice', 'declined');
+        localStorage.setItem('analyticsCookies', 'false');
+        localStorage.setItem('marketingCookies', 'false');
+        localStorage.setItem('functionalCookies', 'false');
+        
+        console.log('Cookies declined');
+    }
+    
+    function showCookieSettings() {
+        // Create settings modal
+        const settingsModal = document.createElement('div');
+        settingsModal.className = 'cookie-settings-modal';
+        settingsModal.innerHTML = `
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Cookie Settings</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="cookie-category">
+                        <div class="cookie-category-header">
+                            <h4>Essential Cookies</h4>
+                            <label class="toggle">
+                                <input type="checkbox" checked disabled>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+                    </div>
+                    
+                    <div class="cookie-category">
+                        <div class="cookie-category-header">
+                            <h4>Analytics Cookies</h4>
+                            <label class="toggle">
+                                <input type="checkbox" id="analytics-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>These cookies help us understand how visitors interact with our website.</p>
+                    </div>
+                    
+                    <div class="cookie-category">
+                        <div class="cookie-category-header">
+                            <h4>Marketing Cookies</h4>
+                            <label class="toggle">
+                                <input type="checkbox" id="marketing-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>These cookies are used to track visitors across websites for marketing purposes.</p>
+                    </div>
+                    
+                    <div class="cookie-category">
+                        <div class="cookie-category-header">
+                            <h4>Functional Cookies</h4>
+                            <label class="toggle">
+                                <input type="checkbox" id="functional-toggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <p>These cookies enable enhanced functionality and personalization.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline" id="save-settings">Save Settings</button>
+                    <button class="btn btn-primary" id="accept-all-settings">Accept All</button>
+                </div>
+            </div>
+        `;
+        
+        // Add styles
+        settingsModal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        
+        document.body.appendChild(settingsModal);
+        
+        // Add event listeners
+        settingsModal.querySelector('.modal-close').addEventListener('click', () => {
+            settingsModal.remove();
+        });
+        
+        settingsModal.querySelector('.modal-overlay').addEventListener('click', () => {
+            settingsModal.remove();
+        });
+        
+        settingsModal.querySelector('#save-settings').addEventListener('click', () => {
+            saveCookieSettings();
+            settingsModal.remove();
+            hideNotification();
+        });
+        
+        settingsModal.querySelector('#accept-all-settings').addEventListener('click', () => {
+            acceptAllCookies();
+            settingsModal.remove();
+            hideNotification();
+        });
+    }
+    
+    function saveCookieSettings() {
+        const analytics = document.getElementById('analytics-toggle').checked;
+        const marketing = document.getElementById('marketing-toggle').checked;
+        const functional = document.getElementById('functional-toggle').checked;
+        
+        localStorage.setItem('cookieChoice', 'customized');
+        localStorage.setItem('analyticsCookies', analytics.toString());
+        localStorage.setItem('marketingCookies', marketing.toString());
+        localStorage.setItem('functionalCookies', functional.toString());
+        
+        if (analytics) {
+            initializeTracking();
+        }
+        
+        console.log('Cookie settings saved');
+    }
+    
+    function hideNotification() {
+        cookieNotification.classList.remove('show');
+        setTimeout(() => {
+            cookieNotification.style.display = 'none';
+        }, 300);
+    }
+    
+    function initializeTracking() {
+        // Initialize Google Analytics or other tracking
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted',
+                'ad_storage': 'granted'
+            });
+        }
+    }
+}
 
 // Scroll to Top Button
 function initScrollToTop() {

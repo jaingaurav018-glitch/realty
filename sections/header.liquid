@@ -17,7 +17,59 @@
       <!-- Navigation Menu -->
       <nav class="nav-menu">
         <a href="/" {% if template == 'index' %}class="active"{% endif %}>Home</a>
-        <a href="/collections/properties" {% if template contains 'collection' and collection.handle == 'properties' %}class="active"{% endif %}>Properties</a>
+        
+        <!-- Properties Mega Menu -->
+        <div class="mega-menu-item">
+          <a href="/collections/properties" {% if template contains 'collection' and collection.handle == 'properties' %}class="active"{% endif %}>
+            Properties
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="currentColor">
+              <path d="M1.41 0L6 4.58L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0Z"/>
+            </svg>
+          </a>
+          <div class="mega-menu-dropdown">
+            <div class="mega-menu-content">
+              <div class="mega-menu-column">
+                <h4>Property Types</h4>
+                <ul>
+                  <li><a href="/collections/apartments">Apartments</a></li>
+                  <li><a href="/collections/villas">Villas</a></li>
+                  <li><a href="/collections/plots">Plots</a></li>
+                  <li><a href="/collections/commercial">Commercial</a></li>
+                  <li><a href="/collections/rental">Rental Properties</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-column">
+                <h4>Locations</h4>
+                <ul>
+                  <li><a href="/collections/ahmedabad">Ahmedabad</a></li>
+                  <li><a href="/collections/gandhinagar">Gandhinagar</a></li>
+                  <li><a href="/collections/vadodara">Vadodara</a></li>
+                  <li><a href="/collections/surat">Surat</a></li>
+                  <li><a href="/collections/rajkot">Rajkot</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-column">
+                <h4>Price Range</h4>
+                <ul>
+                  <li><a href="/collections/under-50-lakhs">Under ₹50 Lakhs</a></li>
+                  <li><a href="/collections/50-lakhs-1-crore">₹50 Lakhs - ₹1 Crore</a></li>
+                  <li><a href="/collections/1-2-crore">₹1 - ₹2 Crore</a></li>
+                  <li><a href="/collections/above-2-crore">Above ₹2 Crore</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-column">
+                <h4>Featured</h4>
+                <ul>
+                  <li><a href="/collections/luxury">Luxury Properties</a></li>
+                  <li><a href="/collections/new-launches">New Launches</a></li>
+                  <li><a href="/collections/investment">Investment Properties</a></li>
+                  <li><a href="/collections/nri">NRI Properties</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <a href="/pages/about" {% if template == 'page' and page.handle == 'about' %}class="active"{% endif %}>About</a>
         <a href="/pages/contact" {% if template == 'page' and page.handle == 'contact' %}class="active"{% endif %}>Contact</a>
         <a href="/blogs/news" {% if template contains 'blog' %}class="active"{% endif %}>News</a>
@@ -114,6 +166,86 @@
   box-shadow: var(--shadow-md);
 }
 
+/* Mega Menu Styles */
+.mega-menu-item {
+  position: relative;
+}
+
+.mega-menu-item > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mega-menu-item > a svg {
+  transition: transform 0.3s ease;
+}
+
+.mega-menu-item:hover > a svg {
+  transform: rotate(180deg);
+}
+
+.mega-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 800px;
+  background: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  margin-top: 8px;
+}
+
+.mega-menu-item:hover .mega-menu-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.mega-menu-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 24px;
+}
+
+.mega-menu-column h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.mega-menu-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mega-menu-column ul li {
+  margin-bottom: 8px;
+}
+
+.mega-menu-column ul li a {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.2s ease;
+  padding: 4px 0;
+  display: block;
+}
+
+.mega-menu-column ul li a:hover {
+  color: var(--color-primary);
+}
+
 @media (max-width: 768px) {
   .nav-menu {
     display: none;
@@ -129,6 +261,17 @@
   
   .header-actions .btn:last-child {
     display: flex;
+  }
+  
+  .mega-menu-dropdown {
+    width: 100vw;
+    left: -20px;
+    right: -20px;
+  }
+  
+  .mega-menu-content {
+    grid-template-columns: 1fr;
+    padding: 16px;
   }
 }
 </style>
