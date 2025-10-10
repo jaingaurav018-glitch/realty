@@ -208,15 +208,44 @@ h6 { font-size: clamp(0.875rem, 1.25vw, 1.125rem); }
 
 .marquee-content {
   display: flex;
-  animation: marquee 30s linear infinite;
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
   white-space: nowrap;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.marquee-content span {
+.marquee-content span,
+.marquee-item {
   display: inline-block;
   padding-right: 2rem;
+}
+
+.marquee-link {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.marquee-link:hover {
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+  transform: scale(1.05);
+}
+
+.marquee-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fbbf24;
+  transition: width 0.3s ease;
+}
+
+.marquee-link:hover::after {
+  width: 100%;
 }
 
 @keyframes marquee {
@@ -231,6 +260,23 @@ h6 { font-size: clamp(0.875rem, 1.25vw, 1.125rem); }
 /* Pause marquee on hover */
 .top-marquee:hover .marquee-content {
   animation-play-state: paused;
+}
+
+/* Marquee speed variations */
+.top-marquee[data-speed="slow"] .marquee-content {
+  animation-duration: 45s;
+}
+
+.top-marquee[data-speed="normal"] .marquee-content {
+  animation-duration: 30s;
+}
+
+.top-marquee[data-speed="fast"] .marquee-content {
+  animation-duration: 15s;
+}
+
+.top-marquee[data-speed="very-fast"] .marquee-content {
+  animation-duration: 10s;
 }
 
 /* Cookie Notification */

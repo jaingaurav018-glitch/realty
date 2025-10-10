@@ -1,1 +1,177 @@
-[]
+[
+  {
+    "name": "Marquee Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Top Marquee Configuration"
+      },
+      {
+        "type": "checkbox",
+        "id": "marquee_enabled",
+        "label": "Enable Marquee",
+        "default": true,
+        "info": "Show or hide the top marquee banner"
+      },
+      {
+        "type": "select",
+        "id": "marquee_speed",
+        "label": "Marquee Speed",
+        "options": [
+          {
+            "value": "slow",
+            "label": "Slow (45 seconds)"
+          },
+          {
+            "value": "normal",
+            "label": "Normal (30 seconds)"
+          },
+          {
+            "value": "fast",
+            "label": "Fast (15 seconds)"
+          },
+          {
+            "value": "very-fast",
+            "label": "Very Fast (10 seconds)"
+          }
+        ],
+        "default": "normal",
+        "info": "Choose the scrolling speed of the marquee"
+      },
+      {
+        "type": "header",
+        "content": "Marquee Items"
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_1_text",
+        "label": "Item 1 - Text",
+        "default": "New Properties Available in Ahmedabad!",
+        "info": "Text content for the first marquee item"
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_1_emoji",
+        "label": "Item 1 - Emoji",
+        "default": "🏠",
+        "info": "Emoji for the first marquee item"
+      },
+      {
+        "type": "url",
+        "id": "marquee_item_1_link",
+        "label": "Item 1 - Link",
+        "info": "Optional link for the first marquee item (leave blank for no link)"
+      },
+      {
+        "type": "checkbox",
+        "id": "marquee_item_1_enabled",
+        "label": "Enable Item 1",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_2_text",
+        "label": "Item 2 - Text",
+        "default": "Commercial Spaces in Prime Locations",
+        "info": "Text content for the second marquee item"
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_2_emoji",
+        "label": "Item 2 - Emoji",
+        "default": "🏢",
+        "info": "Emoji for the second marquee item"
+      },
+      {
+        "type": "url",
+        "id": "marquee_item_2_link",
+        "label": "Item 2 - Link",
+        "info": "Optional link for the second marquee item"
+      },
+      {
+        "type": "checkbox",
+        "id": "marquee_item_2_enabled",
+        "label": "Enable Item 2",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_3_text",
+        "label": "Item 3 - Text",
+        "default": "Best Investment Opportunities",
+        "info": "Text content for the third marquee item"
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_3_emoji",
+        "label": "Item 3 - Emoji",
+        "default": "💰",
+        "info": "Emoji for the third marquee item"
+      },
+      {
+        "type": "url",
+        "id": "marquee_item_3_link",
+        "label": "Item 3 - Link",
+        "info": "Optional link for the third marquee item"
+      },
+      {
+        "type": "checkbox",
+        "id": "marquee_item_3_enabled",
+        "label": "Enable Item 3",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_4_text",
+        "label": "Item 4 - Text",
+        "default": "Call Now: +91 98765 43210",
+        "info": "Text content for the fourth marquee item"
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_4_emoji",
+        "label": "Item 4 - Emoji",
+        "default": "📞",
+        "info": "Emoji for the fourth marquee item"
+      },
+      {
+        "type": "url",
+        "id": "marquee_item_4_link",
+        "label": "Item 4 - Link",
+        "info": "Optional link for the fourth marquee item (e.g., tel: link)"
+      },
+      {
+        "type": "checkbox",
+        "id": "marquee_item_4_enabled",
+        "label": "Enable Item 4",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_5_text",
+        "label": "Item 5 - Text",
+        "default": "Special Offers This Month!",
+        "info": "Text content for the fifth marquee item"
+      },
+      {
+        "type": "text",
+        "id": "marquee_item_5_emoji",
+        "label": "Item 5 - Emoji",
+        "default": "🎉",
+        "info": "Emoji for the fifth marquee item"
+      },
+      {
+        "type": "url",
+        "id": "marquee_item_5_link",
+        "label": "Item 5 - Link",
+        "info": "Optional link for the fifth marquee item"
+      },
+      {
+        "type": "checkbox",
+        "id": "marquee_item_5_enabled",
+        "label": "Enable Item 5",
+        "default": true
+      }
+    ]
+  }
+]

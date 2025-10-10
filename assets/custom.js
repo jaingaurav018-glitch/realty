@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all features
     initBannerSlider();
+    initMarqueeManagement();
     initCookieNotification();
     initScrollToTop();
     initSmoothScrolling();
@@ -137,6 +138,72 @@ function initBannerSlider() {
     
     // Start auto-play
     startAutoPlay();
+}
+
+// Marquee Management Functionality
+function initMarqueeManagement() {
+    const marquee = document.querySelector('.top-marquee');
+    if (!marquee) return;
+    
+    const marqueeContent = marquee.querySelector('.marquee-content');
+    const speed = marquee.dataset.speed || 'normal';
+    
+    // Apply speed-based animation duration
+    const speedMap = {
+        'slow': '45s',
+        'normal': '30s',
+        'fast': '15s',
+        'very-fast': '10s'
+    };
+    
+    const duration = speedMap[speed] || '30s';
+    marqueeContent.style.setProperty('--marquee-duration', duration);
+    
+    // Add click tracking for marquee links
+    const marqueeLinks = marquee.querySelectorAll('.marquee-link');
+    marqueeLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Track marquee link clicks
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'marquee_link_click', {
+                    'link_text': this.textContent.trim(),
+                    'link_url': this.href
+                });
+            }
+            
+            // Add visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+    
+    // Add pause on focus for accessibility
+    marquee.addEventListener('focusin', function() {
+        marqueeContent.style.animationPlayState = 'paused';
+    });
+    
+    marquee.addEventListener('focusout', function() {
+        marqueeContent.style.animationPlayState = 'running';
+    });
+    
+    // Add keyboard control for marquee
+    marquee.setAttribute('tabindex', '0');
+    marquee.addEventListener('keydown', function(e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            if (marqueeContent.style.animationPlayState === 'paused') {
+                marqueeContent.style.animationPlayState = 'running';
+            } else {
+                marqueeContent.style.animationPlayState = 'paused';
+            }
+        }
+    });
+    
+    // Add ARIA label for screen readers
+    marquee.setAttribute('aria-label', 'Scrolling announcements and property updates');
+    marquee.setAttribute('role', 'marquee');
 }
 
 // Cookie Notification Functionality

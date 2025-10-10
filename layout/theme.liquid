@@ -73,11 +73,82 @@
   <a href="#main" class="skip-link">{{ 'general.accessibility.skip_to_content' | t }}</a>
   
   <!-- Top Marquee -->
-  <div class="top-marquee">
-    <div class="marquee-content">
-      <span>🏠 New Properties Available in Ahmedabad! | 🏢 Commercial Spaces in Prime Locations | 💰 Best Investment Opportunities | 📞 Call Now: +91 98765 43210 | 🎉 Special Offers This Month!</span>
+  {% if settings.marquee_enabled %}
+    <div class="top-marquee" data-speed="{{ settings.marquee_speed | default: 'normal' }}">
+      <div class="marquee-content">
+        {% assign marquee_items = '' %}
+        {% assign item_count = 0 %}
+        
+        {% if settings.marquee_item_1_enabled and settings.marquee_item_1_text != blank %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_1_emoji != blank %}{{ settings.marquee_item_1_emoji }} {% endif %}
+            {% if settings.marquee_item_1_link != blank %}
+              <a href="{{ settings.marquee_item_1_link }}" class="marquee-link">{{ settings.marquee_item_1_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_1_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_2_enabled and settings.marquee_item_2_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_2_emoji != blank %}{{ settings.marquee_item_2_emoji }} {% endif %}
+            {% if settings.marquee_item_2_link != blank %}
+              <a href="{{ settings.marquee_item_2_link }}" class="marquee-link">{{ settings.marquee_item_2_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_2_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_3_enabled and settings.marquee_item_3_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_3_emoji != blank %}{{ settings.marquee_item_3_emoji }} {% endif %}
+            {% if settings.marquee_item_3_link != blank %}
+              <a href="{{ settings.marquee_item_3_link }}" class="marquee-link">{{ settings.marquee_item_3_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_3_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_4_enabled and settings.marquee_item_4_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_4_emoji != blank %}{{ settings.marquee_item_4_emoji }} {% endif %}
+            {% if settings.marquee_item_4_link != blank %}
+              <a href="{{ settings.marquee_item_4_link }}" class="marquee-link">{{ settings.marquee_item_4_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_4_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_5_enabled and settings.marquee_item_5_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_5_emoji != blank %}{{ settings.marquee_item_5_emoji }} {% endif %}
+            {% if settings.marquee_item_5_link != blank %}
+              <a href="{{ settings.marquee_item_5_link }}" class="marquee-link">{{ settings.marquee_item_5_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_5_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if item_count == 0 %}
+          <span>🏠 New Properties Available in Ahmedabad! | 🏢 Commercial Spaces in Prime Locations | 💰 Best Investment Opportunities | 📞 Call Now: +91 98765 43210 | 🎉 Special Offers This Month!</span>
+        {% endif %}
+      </div>
     </div>
-  </div>
+  {% endif %}
   
   <!-- Header -->
   {% section 'header' %}
