@@ -3,8 +3,8 @@
   --color-primary: {{ settings.color_primary }};
   --color-secondary: {{ settings.color_secondary }};
   --color-accent: {{ settings.color_accent }};
-  --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
-  --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -194,6 +194,311 @@ h6 { font-size: clamp(0.875rem, 1.25vw, 1.125rem); }
 
 .skip-link:focus {
   top: 6px;
+}
+
+/* Top Marquee */
+.top-marquee {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: white;
+  padding: var(--spacing-sm) 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.marquee-content span,
+.marquee-item {
+  display: inline-block;
+  padding-right: 2rem;
+}
+
+.marquee-link {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.marquee-link:hover {
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+  transform: scale(1.05);
+}
+
+.marquee-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fbbf24;
+  transition: width 0.3s ease;
+}
+
+.marquee-link:hover::after {
+  width: 100%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Pause marquee on hover */
+.top-marquee:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* Marquee speed variations */
+.top-marquee[data-speed="slow"] .marquee-content {
+  animation-duration: 45s;
+}
+
+.top-marquee[data-speed="normal"] .marquee-content {
+  animation-duration: 30s;
+}
+
+.top-marquee[data-speed="fast"] .marquee-content {
+  animation-duration: 15s;
+}
+
+.top-marquee[data-speed="very-fast"] .marquee-content {
+  animation-duration: 10s;
+}
+
+/* Cookie Notification */
+.cookie-notification {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.cookie-notification.show {
+  transform: translateY(0);
+}
+
+.cookie-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: var(--spacing-lg);
+}
+
+.cookie-text h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cookie-text p {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.btn-text {
+  background: transparent;
+  color: #6b7280;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.875rem;
+  text-decoration: underline;
+}
+
+.btn-text:hover {
+  color: #374151;
+}
+
+/* Cookie Settings Modal */
+.cookie-settings-modal .modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.cookie-settings-modal .modal-content {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.cookie-settings-modal .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cookie-settings-modal .modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.cookie-settings-modal .modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+}
+
+.cookie-settings-modal .modal-body {
+  padding: var(--spacing-lg);
+}
+
+.cookie-category {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.cookie-category:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cookie-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.cookie-category-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.cookie-category p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+input:disabled + .slider {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+.cookie-settings-modal .modal-footer {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+  padding: var(--spacing-lg);
+  border-top: 1px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .cookie-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cookie-actions {
+    justify-content: center;
+  }
+  
+  .cookie-settings-modal .modal-content {
+    width: 95%;
+    margin: var(--spacing-md);
+  }
+  
+  .cookie-settings-modal .modal-footer {
+    flex-direction: column;
+  }
 }
 
 /* WhatsApp Float */

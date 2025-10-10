@@ -20,6 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <!-- Favicon -->
   {% if settings.favicon != blank %}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -69,6 +72,84 @@
   <!-- Skip to content link -->
   <a href="#main" class="skip-link">{{ 'general.accessibility.skip_to_content' | t }}</a>
   
+  <!-- Top Marquee -->
+  {% if settings.marquee_enabled %}
+    <div class="top-marquee" data-speed="{{ settings.marquee_speed | default: 'normal' }}">
+      <div class="marquee-content">
+        {% assign marquee_items = '' %}
+        {% assign item_count = 0 %}
+        
+        {% if settings.marquee_item_1_enabled and settings.marquee_item_1_text != blank %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_1_emoji != blank %}{{ settings.marquee_item_1_emoji }} {% endif %}
+            {% if settings.marquee_item_1_link != blank %}
+              <a href="{{ settings.marquee_item_1_link }}" class="marquee-link">{{ settings.marquee_item_1_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_1_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_2_enabled and settings.marquee_item_2_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_2_emoji != blank %}{{ settings.marquee_item_2_emoji }} {% endif %}
+            {% if settings.marquee_item_2_link != blank %}
+              <a href="{{ settings.marquee_item_2_link }}" class="marquee-link">{{ settings.marquee_item_2_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_2_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_3_enabled and settings.marquee_item_3_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_3_emoji != blank %}{{ settings.marquee_item_3_emoji }} {% endif %}
+            {% if settings.marquee_item_3_link != blank %}
+              <a href="{{ settings.marquee_item_3_link }}" class="marquee-link">{{ settings.marquee_item_3_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_3_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_4_enabled and settings.marquee_item_4_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_4_emoji != blank %}{{ settings.marquee_item_4_emoji }} {% endif %}
+            {% if settings.marquee_item_4_link != blank %}
+              <a href="{{ settings.marquee_item_4_link }}" class="marquee-link">{{ settings.marquee_item_4_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_4_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if settings.marquee_item_5_enabled and settings.marquee_item_5_text != blank %}
+          {% if item_count > 0 %} | {% endif %}
+          {% assign item_count = item_count | plus: 1 %}
+          <span class="marquee-item">
+            {% if settings.marquee_item_5_emoji != blank %}{{ settings.marquee_item_5_emoji }} {% endif %}
+            {% if settings.marquee_item_5_link != blank %}
+              <a href="{{ settings.marquee_item_5_link }}" class="marquee-link">{{ settings.marquee_item_5_text }}</a>
+            {% else %}
+              {{ settings.marquee_item_5_text }}
+            {% endif %}
+          </span>
+        {% endif %}
+        
+        {% if item_count == 0 %}
+          <span>🏠 New Properties Available in Ahmedabad! | 🏢 Commercial Spaces in Prime Locations | 💰 Best Investment Opportunities | 📞 Call Now: +91 98765 43210 | 🎉 Special Offers This Month!</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+  
   <!-- Header -->
   {% section 'header' %}
   
@@ -84,6 +165,21 @@
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'custom.js' | asset_url | script_tag }}
   
+  <!-- Cookie Notification -->
+  <div id="cookie-notification" class="cookie-notification">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <h4>🍪 We use cookies</h4>
+        <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookie-accept-all" class="btn btn-primary">Accept All</button>
+        <button id="cookie-settings" class="btn btn-outline">Settings</button>
+        <button id="cookie-decline" class="btn btn-text">Decline</button>
+      </div>
+    </div>
+  </div>
+
   <!-- WhatsApp Integration -->
   {% if settings.contact_phone %}
     <div class="whatsapp-float">
